@@ -7,6 +7,13 @@ Live page at Github Pages
 
 ```bash
 npx create-react-app pathfinding-visualizer-react --template typescript
+cd pathfinding-visualizer-react
+
+# https://material-ui.com/getting-started/installation/
+# https://material-ui.com/guides/typescript/
+npm install @material-ui/core @material-ui/icons @material-ui/lab
+
+# add Roboto Font to public/index.html in the line before manifest
 ```
 
 ## Development and Test
