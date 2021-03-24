@@ -4,6 +4,6 @@ import App from './App';
 
 test('renders home page', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Initial Page/i);
+  const linkElement = screen.getByText(/Pathfinding Visualizer/i);
   expect(linkElement).toBeInTheDocument();
 });

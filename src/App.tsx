@@ -1,5 +1,6 @@
 import { makeStyles, Paper } from '@material-ui/core';
 import React from 'react';
+import PathfindingVisualizer from './components/PathfindingVisualizer';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -16,7 +17,8 @@ function App() {
 
   return (
     <Paper elevation={5} className={classes.paper}>
-      Initial Page
+      <h1>Pathfinding Visualizer</h1>
+      <PathfindingVisualizer nRows={5} nCols={10} />
     </Paper>
   );
 }
