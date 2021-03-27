@@ -31,10 +31,10 @@ function App() {
     <Paper elevation={5} className={classes.paper}>
       <h1>Pathfinding Visualizer</h1>
       <Typography variant="body1" gutterBottom>
-        Click to create <span className={classes.wall}>wall</span> node<br />
-        Drag <span className={classes.start}>start</span> and <span className={classes.end}>end</span> node
+        Click to create <span className={classes.wall}>WALL</span><br />
+        Drag <span className={classes.start}>START</span> and <span className={classes.end}>END</span>
       </Typography>
-      <PathfindingVisualizer nRows={5} nCols={10} />
+      <PathfindingVisualizer nRows={20} nCols={30} />
     </Paper >
   );
 }

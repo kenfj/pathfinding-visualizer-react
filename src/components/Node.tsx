@@ -40,9 +40,11 @@ function Node(props: Props) {
     props.handleMouseUp(props.i, props.j)
   }
 
+  const classWall = props.vertex.nodeType === NodeType.Wall ? classes.wall : ''
+
   return (
     <div
-      className={`${classes.item} ${props.vertex.nodeType === NodeType.Wall ? classes.wall : ''}`}
+      className={`${classes.item} ${classWall}`}
       ref={props.nodeRef}
       title={`${props.i}, ${props.j}`}
       onMouseDown={handleMouseDown}

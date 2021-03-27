@@ -1,5 +1,6 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { Button, makeStyles, Theme } from '@material-ui/core';
 import React, { createRef, RefObject, useState } from 'react';
+import { backtrackToStart, Dijkstra } from '../algorithms/Dijkstra';
 import { NodeType } from '../algorithms/NodeType';
 import { Vertex } from '../algorithms/Vertex';
 import Node from './Node';
@@ -12,6 +13,12 @@ const useStyles = makeStyles<Theme, Props>((theme) => ({
     justifyContent: 'center',
     margin: '50px auto',
   }),
+  visited: {
+    backgroundColor: 'lightgreen'
+  },
+  shortestPath: {
+    backgroundColor: 'yellow'
+  },
 }));
 
 type Coordinates = { i: number, j: number }
@@ -133,29 +140,85 @@ function PathfindingVisualizer(props: Props) {
 
   const handleMouseUp = (i: number, j: number) => {
     setIsMousePressed(false)
+
+    if (isDraggingStart || isDraggingEnd)
+      clear()
+
     setIsDraggingStart(false)
     setIsDraggingEnd(false)
     setIsUpdatingToWall(grid[i][j].nodeType !== NodeType.Wall)
   }
 
-  return (
-    <div className={classes.container}>
-      {
-        refs.map((row, i) =>
-          row.map((node, j) =>
-            <Node
-              i={i} j={j}
-              key={`node-${i}-${j}`}
-              nodeRef={node}
-              vertex={grid[i][j]}
-              handleMouseDown={handleMouseDown}
-              handleMouseEnter={handleMouseEnter}
-              handleMouseUp={handleMouseUp}
-            />
-          )
-        )
+  const clear = () => {
+    refs.forEach((row, i) =>
+      row.forEach((ref, j) => {
+        grid[i][j].reset()
+        ref.current?.classList.remove(classes.visited, classes.shortestPath)
+      })
+    )
+  }
+
+  const visualize = () => {
+    clear()
+
+    const startNode = grid[start.i][start.j]
+    const endNode = grid[end.i][end.j]
+    const visitedNodes = Dijkstra(grid, startNode, endNode);
+    const shortestPath = backtrackToStart(endNode);
+
+    animate(visitedNodes!, shortestPath);
+  }
+
+  const animate = (visitedNodes: Vertex[], shortestPath: Vertex[]) => {
+    for (let i = 1; i < visitedNodes.length - 1; i++) {
+      setTimeout(() => {
+        const node = visitedNodes[i];
+        const ref = refs[node.i][node.j].current!
+        ref.classList.add(classes.visited)
+      }, 10 * i);
+
+      if (i === visitedNodes.length - 2) {
+        setTimeout(() => {
+          animateShortestPath(shortestPath);
+        }, 10 * i);
+        return;
       }
-    </div>
+    }
+  }
+
+  const animateShortestPath = (shortestPath: Vertex[]) => {
+    for (let i = 1; i < shortestPath.length - 1; i++) {
+      setTimeout(() => {
+        const node = shortestPath[i];
+        const ref = refs[node.i][node.j].current!
+        ref.classList.add(classes.shortestPath)
+      }, 50 * i);
+    }
+  }
+
+  return (
+    <>
+      <Button variant="contained" style={{ textTransform: 'none' }} onClick={visualize}>
+        Visualize Dijkstra's Algorithm
+      </Button>
+      <div className={classes.container}>
+        {
+          refs.map((row, i) =>
+            row.map((node, j) =>
+              <Node
+                i={i} j={j}
+                key={`node-${i}-${j}`}
+                nodeRef={node}
+                vertex={grid[i][j]}
+                handleMouseDown={handleMouseDown}
+                handleMouseEnter={handleMouseEnter}
+                handleMouseUp={handleMouseUp}
+              />
+            )
+          )
+        }
+      </div>
+    </>
   )
 }
 
