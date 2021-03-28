@@ -4,7 +4,7 @@ export class Vertex {
   constructor(
     readonly i: number,
     readonly j: number,
-    public nodeType: NodeType,
+    public nodeType: NodeType = NodeType.Default,
     public distance: number = Infinity,
     public prevNode: Vertex | null = null,
     public isVisited: boolean = false,
