@@ -10,7 +10,7 @@ const useMouseEventHandlers = (
   setGrid: Dispatch<SetStateAction<Vertex[][]>>,
   setStart: Dispatch<SetStateAction<Coordinates>>,
   setEnd: Dispatch<SetStateAction<Coordinates>>,
-  clear: () => void,
+  resetGrid: () => void,
 ) => {
   const [isMousePressed, setIsMousePressed] = useState<boolean>(false);
   const [isDraggingStart, setIsDraggingStart] = useState<boolean>(false);
@@ -76,7 +76,7 @@ const useMouseEventHandlers = (
     setIsMousePressed(false)
 
     if (isDraggingStart || isDraggingEnd)
-      clear()
+      resetGrid()
 
     setIsDraggingStart(false)
     setIsDraggingEnd(false)

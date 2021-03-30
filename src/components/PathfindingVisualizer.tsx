@@ -1,5 +1,5 @@
 import { Button, makeStyles, Theme } from '@material-ui/core';
-import React, { createRef, RefObject, useState } from 'react';
+import React, { createRef, RefObject, useEffect, useState } from 'react';
 import { backtrackToStart, Dijkstra } from '../algorithms/Dijkstra';
 import { NodeType } from '../algorithms/NodeType';
 import { Vertex } from '../algorithms/Vertex';
@@ -20,6 +20,12 @@ const useStyles = makeStyles<Theme, Props>((theme) => ({
   },
   shortestPath: {
     backgroundColor: 'yellow'
+  },
+  buttons: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    margin: '10px auto',
   },
 }));
 
@@ -67,7 +73,7 @@ function PathfindingVisualizer(props: Props) {
     )
   const [grid, setGrid] = useState<Vertex[][]>(initialGrid);
 
-  const clear = () => {
+  const resetGrid = () => {
     refs.forEach((row, i) =>
       row.forEach((ref, j) => {
         grid[i][j].reset()
@@ -76,17 +82,39 @@ function PathfindingVisualizer(props: Props) {
     )
   }
 
-  const handlers = useMouseEventHandlers(grid, start, end, setGrid, setStart, setEnd, clear)
+  const resetWall = (probWall: number) => {
+    refs.forEach((row, i) =>
+      row.forEach((ref, j) => {
+        if (grid[i][j].isStartOrEnd()) return
+
+        if (Math.random() < probWall) {
+          grid[i][j].setWall()
+        } else {
+          grid[i][j].clearWall()
+        }
+      })
+    )
+
+    resetGrid()
+    setStart({ i: start.i, j: start.j }) // force re-render
+  }
+
+  useEffect(() => {
+    resetWall(0.35)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const handlers = useMouseEventHandlers(grid, start, end, setGrid, setStart, setEnd, resetGrid)
 
   const visualize = () => {
-    clear()
+    resetGrid()
 
     const startNode = grid[start.i][start.j]
     const endNode = grid[end.i][end.j]
     const visitedNodes = Dijkstra(grid, startNode, endNode);
     const shortestPath = backtrackToStart(endNode);
 
-    animate(visitedNodes!, shortestPath);
+    animate(visitedNodes, shortestPath);
   }
 
   const animate = (visitedNodes: Vertex[], shortestPath: Vertex[]) => {
@@ -118,6 +146,14 @@ function PathfindingVisualizer(props: Props) {
 
   return (
     <>
+      <div className={classes.buttons}>
+        <Button variant="contained" style={{ textTransform: 'none' }} onClick={() => resetWall(0.35)}>
+          Random Wall
+        </Button>
+        <Button variant="contained" style={{ textTransform: 'none' }} onClick={() => resetWall(0)}>
+          Clear Wall
+        </Button>
+      </div>
       <Button variant="contained" style={{ textTransform: 'none' }} onClick={visualize}>
         Visualize Dijkstra's Algorithm
       </Button>

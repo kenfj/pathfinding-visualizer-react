@@ -16,7 +16,19 @@ export class Vertex {
     this.isVisited = false
   }
 
+  public isStartOrEnd() {
+    return this.nodeType === NodeType.Start || this.nodeType === NodeType.End
+  }
+
   public isWall() {
     return this.nodeType === NodeType.Wall
+  }
+
+  public setWall() {
+    this.nodeType = NodeType.Wall
+  }
+
+  public clearWall() {
+    this.nodeType = NodeType.Default
   }
 }

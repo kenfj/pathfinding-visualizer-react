@@ -16,6 +16,8 @@ export function Dijkstra(grid: Vertex[][], startNode: Vertex, endNode: Vertex) {
     updateNeighbors(current)
   }
 
+  return visited  // when could not reach to the end node
+
   // works like a priority queue
   function pop(nodes: Vertex[]) {
     nodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance)
