@@ -14,6 +14,10 @@ const useStyles = makeStyles<Theme, Props>((theme) => ({
     gridTemplateColumns: `repeat(${props.nCols}, 20px)`,
     justifyContent: 'center',
     margin: '50px auto',
+    // stop scroll in grid from smartphone
+    // equivalent to e.preventDefault() plus addEventListener passive false
+    // https://www.little-cuckoo.jp/entry/2020/06/09/123000
+    touchAction: 'none',
   }),
   visited: {
     backgroundColor: 'lightgreen'

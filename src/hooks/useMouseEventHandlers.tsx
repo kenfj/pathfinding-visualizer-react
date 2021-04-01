@@ -38,17 +38,30 @@ const useMouseEventHandlers = (
   }
 
   const updateWall = (i: number, j: number) => {
-    const newType = isUpdatingToWall ? NodeType.Wall : NodeType.Default
-    const newNode = new Vertex(i, j, newType)
+    if (grid[i][j].isStartOrEnd()) return
 
+    if (isUpdatingToWall) {
+      setWall(i, j)
+    } else {
+      clearWall(i, j)
+    }
+  }
+
+  const setWall = (i: number, j: number) => {
     const newGrid = grid.slice()
-    newGrid[i][j] = newNode
+    newGrid[i][j].setWall()
+    setGrid(newGrid)
+  }
 
+  const clearWall = (i: number, j: number) => {
+    const newGrid = grid.slice()
+    newGrid[i][j].clearWall()
     setGrid(newGrid)
   }
 
   const handleMouseDown = (i: number, j: number) => {
     setIsMousePressed(true)
+    setIsUpdatingToWall(grid[i][j].nodeType !== NodeType.Wall)
 
     if (grid[i][j].nodeType === NodeType.Start) {
       setIsDraggingStart(true)
@@ -60,7 +73,6 @@ const useMouseEventHandlers = (
   }
 
   const handleMouseEnter = (i: number, j: number) => {
-    setIsUpdatingToWall(grid[i][j].nodeType !== NodeType.Wall)
     if (!isMousePressed) return
 
     if (isDraggingStart) {
@@ -74,6 +86,7 @@ const useMouseEventHandlers = (
 
   const handleMouseUp = (i: number, j: number) => {
     setIsMousePressed(false)
+    setIsUpdatingToWall(false)
 
     if (isDraggingStart || isDraggingEnd)
       resetGrid()
