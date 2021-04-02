@@ -13,7 +13,7 @@ const useStyles = makeStyles<Theme, Props>((theme) => ({
     gridTemplateRows: `repeat(${props.nRows}, 20px)`,
     gridTemplateColumns: `repeat(${props.nCols}, 20px)`,
     justifyContent: 'center',
-    margin: '50px auto',
+    margin: '20px auto',
     // stop scroll in grid from smartphone
     // equivalent to e.preventDefault() plus addEventListener passive false
     // https://www.little-cuckoo.jp/entry/2020/06/09/123000
@@ -34,10 +34,17 @@ const useStyles = makeStyles<Theme, Props>((theme) => ({
 }));
 
 const initialStartEnd = (p: Props): Coordinates[] => {
-  return [
-    { i: Math.trunc(p.nRows / 2), j: Math.trunc(p.nCols / 5) },
-    { i: Math.trunc(p.nRows / 2), j: Math.trunc(p.nCols * 4 / 5) - 1 }
-  ]
+  if (p.nRows < p.nCols) { // PC
+    return [
+      { i: Math.trunc(p.nRows / 2), j: Math.trunc(p.nCols / 5) },
+      { i: Math.trunc(p.nRows / 2), j: Math.trunc(p.nCols * 4 / 5) - 1 }
+    ]
+  } else { // SmartPhone
+    return [
+      { j: Math.trunc(p.nCols / 2), i: Math.trunc(p.nRows / 5) },
+      { j: Math.trunc(p.nCols / 2), i: Math.trunc(p.nRows * 4 / 5) - 1 }
+    ]
+  }
 }
 
 const initialNodeType = (i: number, j: number, start: Coordinates, end: Coordinates) => {
@@ -55,6 +62,7 @@ type Props = {
 
 function PathfindingVisualizer(props: Props) {
   const classes = useStyles(props);
+  const probWall = 0.32
 
   const startEnd = initialStartEnd(props)
   const [start, setStart] = useState<Coordinates>(startEnd[0]);
@@ -104,7 +112,7 @@ function PathfindingVisualizer(props: Props) {
   }
 
   useEffect(() => {
-    resetWall(0.35)
+    resetWall(probWall)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -151,7 +159,7 @@ function PathfindingVisualizer(props: Props) {
   return (
     <>
       <div className={classes.buttons}>
-        <Button variant="contained" style={{ textTransform: 'none' }} onClick={() => resetWall(0.35)}>
+        <Button variant="contained" style={{ textTransform: 'none' }} onClick={() => resetWall(probWall)}>
           Random Wall
         </Button>
         <Button variant="contained" style={{ textTransform: 'none' }} onClick={() => resetWall(0)}>
