@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/pathfinding-visualizer-react/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/pathfinding-visualizer-react/static/js/main.2622679a.chunk.js",
-    "main.js.map": "/pathfinding-visualizer-react/static/js/main.2622679a.chunk.js.map",
-    "runtime-main.js": "/pathfinding-visualizer-react/static/js/runtime-main.3eb0311d.js",
-    "runtime-main.js.map": "/pathfinding-visualizer-react/static/js/runtime-main.3eb0311d.js.map",
-    "static/js/2.025e6d05.chunk.js": "/pathfinding-visualizer-react/static/js/2.025e6d05.chunk.js",
-    "static/js/2.025e6d05.chunk.js.map": "/pathfinding-visualizer-react/static/js/2.025e6d05.chunk.js.map",
-    "static/js/3.98ed4817.chunk.js": "/pathfinding-visualizer-react/static/js/3.98ed4817.chunk.js",
-    "static/js/3.98ed4817.chunk.js.map": "/pathfinding-visualizer-react/static/js/3.98ed4817.chunk.js.map",
+    "main.js": "/pathfinding-visualizer-react/static/js/main.c56d8caa.chunk.js",
+    "main.js.map": "/pathfinding-visualizer-react/static/js/main.c56d8caa.chunk.js.map",
+    "runtime-main.js": "/pathfinding-visualizer-react/static/js/runtime-main.b9039d72.js",
+    "runtime-main.js.map": "/pathfinding-visualizer-react/static/js/runtime-main.b9039d72.js.map",
+    "static/js/2.6e37eb4d.chunk.js": "/pathfinding-visualizer-react/static/js/2.6e37eb4d.chunk.js",
+    "static/js/2.6e37eb4d.chunk.js.map": "/pathfinding-visualizer-react/static/js/2.6e37eb4d.chunk.js.map",
+    "static/js/3.9e41be8e.chunk.js": "/pathfinding-visualizer-react/static/js/3.9e41be8e.chunk.js",
+    "static/js/3.9e41be8e.chunk.js.map": "/pathfinding-visualizer-react/static/js/3.9e41be8e.chunk.js.map",
     "index.html": "/pathfinding-visualizer-react/index.html",
     "static/css/main.6dea0f05.chunk.css.map": "/pathfinding-visualizer-react/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.025e6d05.chunk.js.LICENSE.txt": "/pathfinding-visualizer-react/static/js/2.025e6d05.chunk.js.LICENSE.txt"
+    "static/js/2.6e37eb4d.chunk.js.LICENSE.txt": "/pathfinding-visualizer-react/static/js/2.6e37eb4d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3eb0311d.js",
-    "static/js/2.025e6d05.chunk.js",
+    "static/js/runtime-main.b9039d72.js",
+    "static/js/2.6e37eb4d.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.2622679a.chunk.js"
+    "static/js/main.c56d8caa.chunk.js"
   ]
 }
