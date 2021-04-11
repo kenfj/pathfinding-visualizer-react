@@ -1,12 +1,18 @@
 # Pathfinding Visualizer in 2021 React TypeScript
 
-Live page at Github Pages
-* https://kenfj.github.io/pathfinding-visualizer-react/
+Live Demo at Github Pages: https://kenfj.github.io/pathfinding-visualizer-react/
+
+* This app is a React App as of 2021 using followings
+  - TypeScript
+  - Functional Component and custom Hooks
+  - Material-UI and makeStyles (not App.css)
+* Responsive Web Design (compatible with smartphones)
+* Auto deploy to GitHub Pages by GitHub Actions
 
 ## Initial Setup
 
 ```bash
-npx create-react-app pathfinding-visualizer-react --template typescript
+npx create-react-app pathfinding-visualizer-react --template typescript --use-npm
 cd pathfinding-visualizer-react
 
 # https://material-ui.com/getting-started/installation/
@@ -20,14 +26,28 @@ npm install @material-ui/core @material-ui/icons @material-ui/lab
 
 ```bash
 BROWSER=none npm start
+open http://localhost:3000/pathfinding-visualizer-react
+
 npm test
 ```
 
-## Deployment
+## Deploy
+
+* auto deploy by GitHub Actions
+  - [.github/workflows/deploy_gh_pages.yml](.github/workflows/deploy_gh_pages.yml)
 
 ```bash
-# deploy to GitHub Pages
+# manual deploy to GitHub Pages
 npm run deploy
 
 # c.f. https://create-react-app.dev/docs/deployment/#github-pages
 ```
+
+## Reference
+
+* Pathfinding Visualizer Tutorial
+ - https://www.youtube.com/watch?v=msttfIHHkak
+* Path Finding Visualizer Tutorial
+  - https://www.youtube.com/watch?v=zRRPYKhBe8I
+* React Tutorial
+  - https://www.youtube.com/watch?v=8o4ng90Uqso
